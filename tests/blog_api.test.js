@@ -95,6 +95,26 @@ test('the id field should be labeled id instead of _id', async () => {
   expect(newBlog.id).toBeDefined()
 })
 
+test('empty likes should result in likes of 0', async () => {
+  const blogWithoutLikes = {
+    title: 'This should have 0 likes',
+    author: 'Master Await',
+    url: 'https://www.await.net'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(blogWithoutLikes)
+    .expect(200)
+
+  const response = await api
+    .get('/api/blogs')
+    .expect(200)
+
+  const fetchedBlog = response.body.find(blog => blog.title === blogWithoutLikes.title)
+  expect(fetchedBlog.likes).toBe(0)
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
