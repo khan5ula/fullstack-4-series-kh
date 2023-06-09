@@ -65,10 +65,16 @@ test('invalid blog should not be added', async () => {
   }
 
   const blogWithoutAuthor = {
-    title: 'This blog is valid and should be received',
+    title: 'This blog is invalid and should not be received',
     author: '',
     url: 'https://www.await.net',
     likes: 12
+  }
+
+  const blogWithoutUrl = {
+    title: 'This blog is invalid and should not be received',
+    author: 'Someone without a website',
+    likes: 1
   }
 
   await api
@@ -79,6 +85,11 @@ test('invalid blog should not be added', async () => {
   await api
     .post('/api/blogs')
     .send(blogWithoutAuthor)
+    .expect(400)
+
+  await api
+    .post('/api/blogs')
+    .send(blogWithoutUrl)
     .expect(400)
 
   /* The amount of blogs on the database should not have been increased */
