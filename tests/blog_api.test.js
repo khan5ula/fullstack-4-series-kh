@@ -38,6 +38,7 @@ test('a valid blog can be added ', async () => {
     url: 'https://www.await.net',
     likes: 12
   }
+
   await api
     .post('/api/blogs')
     .send(newBlog)
@@ -51,6 +52,38 @@ test('a valid blog can be added ', async () => {
   expect(contents).toContain(
     'This blog is valid and should be received'
   )
+})
+
+test('invalid blog should not be added', async () => {
+  const blogsAtStart = await helper.blogsInDb()
+
+  const blogWithoutTitle = {
+    title: '',
+    author: 'Master Await',
+    url: 'https://www.await.net',
+    likes: 12
+  }
+
+  const blogWithoutAuthor = {
+    title: 'This blog is valid and should be received',
+    author: '',
+    url: 'https://www.await.net',
+    likes: 12
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(blogWithoutTitle)
+    .expect(400)
+
+  await api
+    .post('/api/blogs')
+    .send(blogWithoutAuthor)
+    .expect(400)
+
+  /* The amount of blogs on the database should not have been increased */
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd).toHaveLength(blogsAtStart.length)
 })
 
 test('the id field should be labeled id instead of _id', async () => {
