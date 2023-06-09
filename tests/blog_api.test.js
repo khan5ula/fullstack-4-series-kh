@@ -53,6 +53,15 @@ test('a valid blog can be added ', async () => {
   )
 })
 
+test('the id field should be labeled id instead of _id', async () => {
+  const response = await api
+    .get('/api/blogs')
+    .expect(200)
+
+  const newBlog = response.body[0]
+  expect(newBlog.id).toBeDefined()
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
