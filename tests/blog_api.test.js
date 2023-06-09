@@ -31,6 +31,28 @@ test('a specific blog is within the returned blogs', async () => {
     'Second test blog')
 })
 
+test('a valid blog can be added ', async () => {
+  const newBlog = {
+    title: 'This blog is valid and should be received',
+    author: 'Master Await',
+    url: 'https://www.await.net',
+    likes: 12
+  }
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
+
+  const contents = blogsAtEnd.map(n => n.title)
+  expect(contents).toContain(
+    'This blog is valid and should be received'
+  )
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
