@@ -188,6 +188,50 @@ describe('removal of blogs', () => {
     const blogsAtEnd = await helper.blogsInDb()
     expect(blogsAtEnd).toHaveLength(blogsAtStart.length - 1)
   })
+}),
+
+describe('editing blogs', () => {
+  test('blog variables should be changed', async () => {
+    const newBlog = {
+      title: 'This blog will be edited soon',
+      author: 'Author To-Be Edited',
+      url: 'https://www.edition.org',
+      likes: 1
+    }
+
+    const responseAfterPost = await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(200)
+
+    const id = responseAfterPost.body.id
+
+    const editedBlog = {
+      title: 'The title of this blog is now edited',
+      author: 'Author McNow-Edited',
+      url: 'https://www.edition.org',
+      likes: 100
+    }
+
+    await api
+      .put(`/api/blogs/${id}`)
+      .send(editedBlog)
+      .expect(200)
+
+    const responseAfterEdit = await api
+      .get('/api/blogs')
+      .expect(200)
+
+    const receivedBlog = responseAfterEdit.body.find(blog => blog.id === id)
+
+    /* Title, author and likes should be updated */
+    expect(receivedBlog.title).toEqual(editedBlog.title)
+    expect(receivedBlog.author).toEqual(editedBlog.author)
+    expect(receivedBlog.likes).toEqual(editedBlog.likes)
+
+    /* URL should be the same with the original blog */
+    expect(receivedBlog.url).toEqual(newBlog.url)
+  })
 })
 
 afterAll(async () => {
