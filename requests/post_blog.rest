@@ -1,6 +1,6 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-//Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRoaXJkdXNlciIsImlkIjoiNjQ4NTc4YjcyMWIwZTU4NmUxYTQyMjU4IiwiaWF0IjoxNjg2NDc4OTQ4fQ.TX5xXBO4QQpF6LflVqbr4Je8SAug7Wpc833tsyXRBJs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 
 {
     "title": "Unauthenticated blog",
