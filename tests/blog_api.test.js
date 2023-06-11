@@ -267,6 +267,36 @@ describe('user related tests', () => {
     const usernames = usersAtEnd.map(u => u.username)
     expect(usernames).toContain(newUser.username)
   })
+
+  test('new user with invalid info should not be accepted', async () => {
+    /* Test too short username */
+    var newUser = {
+      username: 'ro',
+      name: 'root',
+      password: 'salasana',
+    }
+
+    var result = await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(400)
+
+    expect(result.body.error).toContain('is shorter than the minimum allowed length')    
+
+    /* Test too short password */
+    newUser = {
+      username: 'acceptable',
+      name: 'mr accept',
+      password: 'ff',
+    }
+
+    result = await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(400)
+
+    expect(result.body.error).toContain('password must have minimum of 3 characters')    
+  })
 })
 
 afterAll(async () => {
