@@ -10,7 +10,6 @@ const requestLogger = (request, response, next) => {
 
 const tokenExtractor = (request, response, next) => {
   const authorization = request.get('authorization')
-  console.log(`Authorization: ${authorization}`)
   
   if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
     request.token = authorization.replace('Bearer ', '')
