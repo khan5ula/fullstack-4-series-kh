@@ -1,10 +1,10 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRoaXJkdXNlciIsImlkIjoiNjQ4NTc4YjcyMWIwZTU4NmUxYTQyMjU4IiwiaWF0IjoxNjg2NDc4OTQ4fQ.TX5xXBO4QQpF6LflVqbr4Je8SAug7Wpc833tsyXRBJs
 
 {
-    "title": "Another blog title from an user",
-    "author": "Mr. Blog writer",
+    "title": "Blog that should be accepted with a token",
+    "author": "Third User",
     "url": "www.url.com",
-    "likes": 2,
-    "user": "648578b721b0e586e1a42258"
+    "likes": 6
 }
