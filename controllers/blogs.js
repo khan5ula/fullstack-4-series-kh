@@ -34,12 +34,12 @@ blogsRouter.post('/', async (request, response) => {
 blogsRouter.delete('/:id', async (request, response) => {
   const blogToBeRemoved = await Blog.findById(request.params.id)
   
-  const decodedToken = jwt.verify(request.token, process.env.SECRET)
+  const user = request.user
   
-  console.log(`User Id from request: ${decodedToken.id}`)
+  console.log(`User Id from request: ${user}`)
   console.log(`User Id from blog: ${blogToBeRemoved.user.toString()}`)
   
-  if (blogToBeRemoved.user.toString() !== decodedToken.id ) {
+  if (blogToBeRemoved.user.toString() !== user ) {
     return response.status(401).json({ error: 'not authorized: only the creator can delete a blog' })
   }
 
