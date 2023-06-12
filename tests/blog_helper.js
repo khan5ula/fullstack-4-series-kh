@@ -11,6 +11,12 @@ const mostLikes = (blogs) => {
     : blogs.reduce((max, blog) => max.likes > blog.likes ? max : blog, blogs[0])
 }
 
+const dummyUser = {
+  username: 'dummy',
+  name: 'Dummy User',
+  password: 'passw'
+}
+
 const initialBlogs = [
   {
     title: 'First test blog',
@@ -64,4 +70,5 @@ module.exports = {
   mostLikes,
   blogsInDb,
   usersInDb,
+  dummyUser,
 }

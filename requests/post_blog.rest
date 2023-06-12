@@ -1,10 +1,10 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRoaXJkdXNlciIsImlkIjoiNjQ4NTc4YjcyMWIwZTU4NmUxYTQyMjU4IiwiaWF0IjoxNjg2NTAyMDIwfQ.K5kfDBXbYNayDCEfLQ-3Ld2a3pipvbHl1ailcJ4B0Lo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRoaXJkdXNlciIsImlkIjoiNjQ4NTc4YjcyMWIwZTU4NmUxYTQyMjU4IiwiaWF0IjoxNjg2NTU5ODU0fQ.jRKbE67_KBLOn3L1O8Z46Mmxfne3PQqG2pQFcqcc4DI
 
 {
-    "title": "DELETE THIS",
-    "author": "Thirduser",
+    "title": "Third from thirduser",
+    "author": "Third user",
     "url": "www.url.com",
     "likes": 6
 }
