@@ -427,5 +427,7 @@ describe('user related tests', () => {
 })
 
 afterAll(async () => {
+  await User.deleteMany()
+  await Blog.deleteMany()
   await mongoose.connection.close()
 })
