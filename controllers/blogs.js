@@ -30,13 +30,13 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
 
 blogsRouter.delete('/:id', userExtractor, async (request, response) => {
   const blogToBeRemoved = await Blog.findById(request.params.id)
-  
+
   const user = request.user
-  
+
   console.log(`User Id from request: ${user}`)
   console.log(`User Id from blog: ${blogToBeRemoved.user.toString()}`)
-  
-  if (blogToBeRemoved.user.toString() !== user ) {
+
+  if (blogToBeRemoved.user.toString() !== user) {
     return response.status(401).json({ error: 'not authorized: only the creator can delete a blog' })
   }
 
@@ -53,12 +53,14 @@ blogsRouter.put('/:id', userExtractor, (request, response, next) => {
     url: body.url,
     likes: body.likes
   }
-
+  
   Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
+    .populate('user', { username: 1, name: 1 })
     .then(updatedBlog => {
       response.json(updatedBlog)
     })
     .catch(error => next(error))
+
 })
 
 module.exports = blogsRouter
