@@ -8,13 +8,16 @@ const likes = (blogs) => {
 const mostLikes = (blogs) => {
   return blogs.length === 0
     ? null
-    : blogs.reduce((max, blog) => max.likes > blog.likes ? max : blog, blogs[0])
+    : blogs.reduce(
+        (max, blog) => (max.likes > blog.likes ? max : blog),
+        blogs[0]
+      )
 }
 
 const dummyUser = {
   username: 'dummy',
   name: 'Dummy User',
-  password: 'passw'
+  password: 'passw',
 }
 
 const initialBlogs = [
@@ -22,14 +25,14 @@ const initialBlogs = [
     title: 'First test blog',
     author: 'Someone',
     url: 'www.blogs.com',
-    likes: 5
+    likes: 5,
   },
   {
     title: 'Second test blog',
     author: 'Someone else',
     url: 'www.blogger.com',
-    likes: 3
-  }
+    likes: 3,
+  },
 ]
 
 const listWithOneBlog = [
@@ -39,8 +42,8 @@ const listWithOneBlog = [
     author: 'Edsger W. Dijkstra',
     url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
     likes: 5,
-    __v: 0
-  }
+    __v: 0,
+  },
 ]
 
 const blogWithLotOfLikes = {
@@ -53,14 +56,14 @@ const blogWithLotOfLikes = {
 const blogsInDb = async () => {
   const blogs = await Blog.find({})
   if (blogs != null) {
-    return blogs.map(blog => blog.toJSON())
+    return blogs.map((blog) => blog.toJSON())
   }
   return []
 }
 
 const usersInDb = async () => {
   const users = await User.find({})
-  return users.map(u => u.toJSON())
+  return users.map((u) => u.toJSON())
 }
 
 module.exports = {

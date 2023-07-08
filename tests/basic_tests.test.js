@@ -31,6 +31,10 @@ describe('max likes', () => {
 
   test('of a bigger list is reduced right', () => {
     const result = helper.mostLikes(largeBlogList.blogs)
-    expect(result).toEqual(largeBlogList.blogs.find(blog => blog.title === 'Canonical string reduction'))
+    expect(result).toEqual(
+      largeBlogList.blogs.find(
+        (blog) => blog.title === 'Canonical string reduction'
+      )
+    )
   })
 })
